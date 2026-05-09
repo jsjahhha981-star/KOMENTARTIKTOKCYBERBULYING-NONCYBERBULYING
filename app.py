@@ -384,29 +384,28 @@ elif menu == "Upload CSV / XLSX":
                     break
 
             # ======================
-            # PREDIKSI
-            # ======================
-            if found_col:
-
-                # ======================
-# BERSIHKAN DATA
-# ======================
-df[found_col] = df[found_col].fillna("").astype(str)
-
-# hapus komentar kosong
-df = df[df[found_col].str.strip() != ""]
-
-# ======================
 # PREDIKSI
 # ======================
-df['prediksi'] = model.predict(
-    df[found_col]
-)
+if found_col:
 
-                st.success("✅ Prediksi berhasil dilakukan")
+    # ======================
+    # BERSIHKAN DATA
+    # ======================
+    df[found_col] = df[found_col].fillna("").astype(str)
 
-                st.dataframe(df)
+    # hapus komentar kosong
+    df = df[df[found_col].str.strip() != ""]
 
+    # ======================
+    # PREDIKSI
+    # ======================
+    df['prediksi'] = model.predict(
+        df[found_col]
+    )
+
+    st.success("✅ Prediksi berhasil dilakukan")
+
+    st.dataframe(df)
                 # ======================
                 # GRAFIK
                 # ======================
