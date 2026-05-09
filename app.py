@@ -388,11 +388,20 @@ elif menu == "Upload CSV / XLSX":
             # ======================
             if found_col:
 
-                df[found_col] = df[found_col].astype(str)
+                # ======================
+# BERSIHKAN DATA
+# ======================
+df[found_col] = df[found_col].fillna("").astype(str)
 
-                df['prediksi'] = model.predict(
-                    df[found_col]
-                )
+# hapus komentar kosong
+df = df[df[found_col].str.strip() != ""]
+
+# ======================
+# PREDIKSI
+# ======================
+df['prediksi'] = model.predict(
+    df[found_col]
+)
 
                 st.success("✅ Prediksi berhasil dilakukan")
 
