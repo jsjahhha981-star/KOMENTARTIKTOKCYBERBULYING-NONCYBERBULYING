@@ -420,7 +420,8 @@ elif menu == "Prediksi":
         "dasar bodoh",
         "dasar goblok",
         "dasar miskin",
-        "dasar jelek"
+        "dasar jelek",
+        "keriting"
 
     ]
 
@@ -437,7 +438,8 @@ elif menu == "Prediksi":
         "orang itu",
         "si",
         "muka kamu",
-        "badan kamu"
+        "badan kamu",
+        "rambut"
 
     ]
 
