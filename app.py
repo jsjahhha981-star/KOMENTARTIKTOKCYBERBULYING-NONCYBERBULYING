@@ -363,10 +363,10 @@ elif menu == "Prediksi":
     </div>
     """, unsafe_allow_html=True)
 
-
-    # mapping label model
+    # ==========================================
+    # MAPPING LABEL
+    # ==========================================
     def hasil_label(pred):
-
         pred = str(pred).lower().strip()
 
         if pred == "cyberbullying":
@@ -378,50 +378,127 @@ elif menu == "Prediksi":
         return pred
 
 
+    # ==========================================
+    # KAMUS KATA CYBERBULLYING
+    # ==========================================
+
+    kata_penghinaan = [
+
+        "jelek",
+        "jelek banget",
+        "bodoh",
+        "tolol",
+        "goblok",
+        "bangsat",
+        "anjing",
+        "bego",
+        "idiot",
+        "kampungan",
+        "najis",
+        "brengsek",
+        "kontol",
+        "memek",
+        "tai",
+        "pecundang",
+        "sampah",
+        "cacat",
+        "gendut",
+        "kurus",
+        "item",
+        "hitam",
+        "miskin",
+        "bau",
+        "norak",
+        "kampret",
+        "otak udang",
+        "mati aja",
+        "bunuh diri",
+        "tidak berguna",
+        "gak berguna",
+        "anjir lu",
+        "tolol lu",
+        "dasar bodoh",
+        "dasar goblok",
+        "dasar miskin",
+        "dasar jelek"
+
+    ]
+
+
+    kata_target = [
+
+        "kamu",
+        "kau",
+        "lu",
+        "loe",
+        "lo",
+        "elu",
+        "dia",
+        "orang itu",
+        "si",
+        "muka kamu",
+        "badan kamu"
+
+    ]
+
 
     text = st.text_area(
         "Masukkan komentar TikTok:",
         height=150,
-        placeholder="Contoh: cantik yaa"
+        placeholder="Contoh: Kamu jelek banget"
     )
-
 
 
     if st.button("🚀 Prediksi Sekarang"):
 
-
         if text.strip() == "":
 
-            st.warning(
-                "⚠️ Masukkan komentar terlebih dahulu"
-            )
-
+            st.warning("⚠️ Masukkan komentar terlebih dahulu")
 
         else:
 
             try:
 
-                # ======================
-                # PREDIKSI PIPELINE
-                # ======================
-                hasil = model.predict(
-                    [text]
-                )[0]
+                komentar = text.lower()
 
+                # ==========================================
+                # RULE BASED
+                # ==========================================
 
-                label = hasil_label(
-                    hasil
+                ada_penghinaan = any(
+                    kata in komentar
+                    for kata in kata_penghinaan
+                )
+
+                ada_target = any(
+                    kata in komentar
+                    for kata in kata_target
                 )
 
 
+                # ==========================================
+                # PRIORITAS RULE
+                # ==========================================
 
-                # ======================
-                # TAMPILKAN HASIL
-                # ======================
+                if ada_penghinaan and ada_target:
+
+                    hasil = "cyberbullying"
+
+                else:
+
+                    hasil = model.predict([text])[0]
+
+
+                label = hasil_label(hasil)
+
+
+                # ==========================================
+                # HASIL
+                # ==========================================
+
                 if label == "Cyberbullying":
 
-
-                    st.markdown("""
+                    st.markdown(f"""
                     <div style="
                     background:#fee2e2;
                     padding:25px;
@@ -429,41 +506,45 @@ elif menu == "Prediksi":
                     color:#dc2626;
                     font-size:20px;">
 
-                    🚨 Komentar terdeteksi sebagai
+                    🚨 <b>Cyberbullying</b>
+
+                    <br><br>
+
+                    Komentar yang dianalisis:
+
                     <br>
-                    <b>Cyberbullying</b>
+
+                    <i>"{text}"</i>
 
                     </div>
-                    """,
-                    unsafe_allow_html=True)
-
-
+                    """, unsafe_allow_html=True)
 
                 else:
 
-
-                    st.markdown("""
+                    st.markdown(f"""
                     <div style="
                     background:#dcfce7;
                     padding:25px;
                     border-radius:15px;
-                    color:#16a34a;
+                    color:#15803d;
                     font-size:20px;">
 
-                    ✅ Komentar terdeteksi sebagai
+                    ✅ <b>Non Cyberbullying</b>
+
+                    <br><br>
+
+                    Komentar yang dianalisis:
+
                     <br>
-                    <b>Non Cyberbullying</b>
+
+                    <i>"{text}"</i>
 
                     </div>
-                    """,
-                    unsafe_allow_html=True)
-
+                    """, unsafe_allow_html=True)
 
             except Exception as e:
 
-                st.error(
-                    f"Terjadi error pada model: {e}"
-                )
+                st.error(f"Terjadi error pada model: {e}")
 
 # ======================
 # MENU UPLOAD
