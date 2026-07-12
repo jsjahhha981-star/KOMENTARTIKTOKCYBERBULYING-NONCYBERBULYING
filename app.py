@@ -405,6 +405,7 @@ elif menu == "Prediksi":
     "cantik tapi oon"
 
     "kurus",
+    "cantik tapi kurus",
     "kurus banget",
     "kurus kering",
     "kurus kayak tiang",
