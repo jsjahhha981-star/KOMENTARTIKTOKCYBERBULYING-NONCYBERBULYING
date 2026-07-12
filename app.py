@@ -411,6 +411,7 @@ elif menu == "Prediksi":
     "kurus kayak tiang",
     "kurus kayak lidi",
     "kurus kayak kerangka",
+    "cantik tapi oon"
 
     "gendut",
     "gendut banget",
