@@ -608,6 +608,7 @@ elif menu == "Prediksi":
     "diri lu",
     "diri lo",
     "engkau",
+    "cantik",
 
     # Bahasa gaul
     "lu",
