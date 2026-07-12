@@ -435,6 +435,8 @@ elif menu == "Prediksi":
     "kuping besar",
     "kepala botak",
     "botak",
+    "rambut keriting",
+    "kayak tiang"
 
     # Intelegensi
     "bodoh",
