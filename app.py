@@ -401,6 +401,8 @@ elif menu == "Prediksi":
     "muka kayak tuyul",
     "muka kayak zombie",
     "muka jelek banget",
+    "rambutnya keriting kayak mie",
+    "cantik tapi oon"
 
     "kurus",
     "kurus banget",
